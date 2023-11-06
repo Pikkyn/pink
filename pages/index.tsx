@@ -20,6 +20,7 @@ SendOutlined,
 import { ConnectWallet, lightTheme } from '@thirdweb-dev/react';
 import { Layout, Menu, Button, theme,Avatar,Typography,Card, Col, Row,Space} from 'antd';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
+import styles from '../styles/Home.module.css';
 const { Header, Sider, Footer, Content } = Layout;
 const { Text } = Typography;
 
@@ -167,12 +168,21 @@ const items: MenuItem[] = [
           &nbsp;
           <Text strong>PinkSale</Text>
           &nbsp;<span style={{
-            float:'right'
-
+            float:'right',
+            
           }}>
-          <Text code  strong ><LineChartOutlined />dexview.com</Text>
-          &nbsp;
+            <div  style={{
+              position:'absolute',
+              right:'0px',
+              marginRight:'20px',
+              padding:'5px',
+          
+            }}
+            >
+            <Text code  strong><LineChartOutlined />dexview.com</Text>
+            &nbsp;
           <Text code  strong ><LineChartOutlined />BSC MAINNET</Text>
+          &nbsp;
           <ConnectWallet
         theme={lightTheme({
           colors: {
@@ -187,6 +197,10 @@ const items: MenuItem[] = [
         btnTitle={"Connect"}
         modalSize={"compact"}
       />
+            </div>
+            
+          
+          
      </span>
       </div>
         </Header>
@@ -205,10 +219,14 @@ const items: MenuItem[] = [
           marginLeft:'-20px',
           marginRight:'-20px',
           paddingLeft: '100px',
+          overflow:'auto',
+          whiteSpace:'nowrap',
+
           }}>
       <LineChartOutlined 
       style={{
         color:"#f95192",
+        marginRight:'40px'
       }}/>&nbsp;Trending&nbsp;#1 BanterBucks&nbsp;&nbsp;#2 zkEVM&nbsp;&nbsp;#3PMPY&nbsp;&nbsp;#4 HOOD&nbsp;&nbsp;#5 UNP&nbsp;&nbsp;#6 SAFELUNAR&nbsp;&nbsp;#7 zkEVM&nbsp;&nbsp;#8 zkEVM&nbsp;&nbsp;#9 zkEVM&nbsp;&nbsp;#10 zkEVM
       
       </div>
@@ -217,7 +235,13 @@ textAlign:'center',
 padding:'50px',
 backgroundColor:'#faf9fa'
       }}>
-        <h2>The Launchpad Protocol for Everyone!</h2>
+        <h2 
+        style={{
+          fontSize:'38px',
+          marginBottom:'0.5em',
+          fontWeight:'600px',
+          // lineHeight:'1.23px',
+        }}>The Launchpad Protocol for Everyone!</h2>
         <p style={{
           fontSize:'20px',
           textAlign:'center'
@@ -235,7 +259,7 @@ backgroundColor:'#faf9fa'
               alignItems:'center'
             }}>
     <Col span={6}>
-      <Card title="$387.4M" bordered={false} style={{ width:'auto' }}>
+      <Card title="$387.4M" bordered={false} style={{ width:'300' }}>
       Total Liquidity Raised
       </Card>
     </Col>
@@ -255,8 +279,10 @@ backgroundColor:'#faf9fa'
       </Card>
     </Col>
   </Row>
+
+
   <br/>
-  <h2>A Suite of Tools for Token Sales.</h2>
+  <h2 className='{styles.heading}'>A Suite of Tools for Token Sales.</h2>
          <p style={{
           fontSize:'20px',
           textAlign:'center'
@@ -316,7 +342,7 @@ backgroundColor:'#faf9fa'
           </Col>
         </Row>
 
-
+    
       </div>
       
         </Content>
@@ -326,6 +352,9 @@ backgroundColor:'#faf9fa'
       </Layout>
     </Layout>
   );
+
+  
+
 };
 
 export default Home;

@@ -1,0 +1,9 @@
+@media screen and (max-width: 600px){
+    .heading{
+     margin: -200px;
+     border-radius: 300px;
+     right: 100px !important
+    }
+};
+
+

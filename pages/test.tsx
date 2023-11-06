@@ -177,7 +177,7 @@ return (
             float:'right'
 
           }}>
-          <Text code  strong ><LineChartOutlined />dexview.com</Text>
+          <Text code  strong ><LineChartOutlined />deview.com</Text>
           &nbsp;
           <Text code  strong ><LineChartOutlined />BSC MAINNET</Text>
           <ConnectWallet
