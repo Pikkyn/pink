@@ -20,7 +20,7 @@ SendOutlined,
 import { ConnectWallet, lightTheme } from '@thirdweb-dev/react';
 import { Layout, Menu, Button, theme,Avatar,Typography,Card, Col, Row,Space} from 'antd';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
-import styles from '../styles/Home.module.css';
+// import styles from '../styles/Home.module.css';
 const { Header, Sider, Footer, Content } = Layout;
 const { Text } = Typography;
 
@@ -231,9 +231,9 @@ const items: MenuItem[] = [
       
       </div>
       <div style={{
-textAlign:'center',
-padding:'50px',
-backgroundColor:'#faf9fa'
+        textAlign:'center',
+        padding:'50px',
+        backgroundColor:'#faf9fa'
       }}>
         <h2 
         style={{
@@ -255,7 +255,7 @@ backgroundColor:'#faf9fa'
               backgroundColor:'#fdeaf1',
               color:'#f95192'
             }}><b>Learn More</b></Button><br/><br/><br/>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{
+            {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{
               alignItems:'center'
             }}>
     <Col span={6}>
@@ -278,16 +278,40 @@ backgroundColor:'#faf9fa'
       Total Values Locked
       </Card>
     </Col>
-  </Row>
+  </Row> */}
 
+  <div className='grid lg:grid-cols-4 gap-10'>
+        <div>
+        <Card title="$387.4M" bordered={false} style={{ width:'200' }}>
+          Total Liquidity Raised
+          </Card>
+        </div>
+        <div>
+        <Card title="20513" bordered={false} style={{ width: 300 }}>
+          Total Projects
+          </Card>
+        </div>
+        <div>
+        <Card title="2.3M" bordered={false} style={{ width: 300 }}>
+          Total Participants
+          </Card>
+        </div>
+        <div>
+        <Card title="$214.9M" bordered={false} style={{ width: 300 }}>
+          Total Values Locked
+          </Card>
+        </div>  
+  </div>
+  
 
   <br/>
+  
   <h2 className='{styles.heading}'>A Suite of Tools for Token Sales.</h2>
          <p style={{
           fontSize:'20px',
           textAlign:'center'
         }}>A suite of tools were built to help you create your own tokens and launchpads in a fast, <br/>simple and cheap way, with no prior code knowledge required and 100% decentralized!</p><br/><br/><br/>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={6}>
           <Card bordered={false} >
           <Avatar
@@ -340,10 +364,63 @@ backgroundColor:'#faf9fa'
 
           </Card>
           </Col>
-        </Row>
+        </Row> */}
 
+      <div className='grid lg:grid-cols-4 gap-10'>
+          <div>
+          <Card bordered={false} >
+              <Avatar
+        size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+        src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
+        <h2>Standard</h2>
+            <p style={{
+              fontSize:'20px',
+              textAlign:'center'
+            }}>Mint standard tokens on ETH, BSC, AVAX, Fantom, Polygon.</p>
+              </Card>
+          </div>
+            <div>
+            <Card bordered={false} >
+              <Avatar
+        size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+        src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
+        <h2>Deflationary</h2>
+            <p style={{
+              fontSize:'20px',
+              textAlign:'center'
+            }}>Generate deflationary tokens with tax and/or charity functions.</p>
+              </Card>
+            </div>
+              <div>
+                <Card bordered={false} >
+                      <Avatar
+                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+                src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
+                <h2>Customization</h2>
+                    <p style={{
+                      fontSize:'20px',
+                      textAlign:'center'
+                    }}>Create a token sale for your own custom token easily.</p>
+
+                 </Card>
+                </div>  
+                    <div>
+                          <Card bordered={false} >
+                          <Avatar
+                    size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+                    src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
+                    <h2>Launchpad</h2>
+                        <p style={{
+                          fontSize:'20px',
+                          textAlign:'center'
+                        }}>Use the token you mint to create a launchpad with just a few clicks</p>
+
+                          </Card>
+                    </div>
+      </div>
     
       </div>
+      
       
         </Content>
         
