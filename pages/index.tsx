@@ -171,14 +171,14 @@ const items: MenuItem[] = [
             float:'right',
             
           }}>
-            <div className='visible sm:invisible' style={{
+            <div className='invisible md:visible' style={{
               position:'absolute',
               right:'0px',
               marginRight:'20px',
               padding:'5px',
             }}
             >
-            <Text code  strong><LineChartOutlined />dexview.com</Text>
+            <Text code  strong ><LineChartOutlined />dexview.com</Text>
             &nbsp;
           <Text code  strong ><LineChartOutlined />BSC MAINNET</Text>
           &nbsp;
@@ -196,9 +196,25 @@ const items: MenuItem[] = [
         btnTitle={"Connect"}
         modalSize={"compact"}
       />
+      
+            </div>
+            <div className='visible md:invisible'>
+              <ConnectWallet
+             theme={lightTheme({
+              colors: {
+              accentText: "#f95192",
+              accentButtonBg: "#f95192",
+              primaryText: "#f95192",
+              primaryButtonBg: "#fdeaf1",
+              accentButtonText: "#fdfcfd",
+              primaryButtonText: "#f95192",
+            },
+        })}
+        btnTitle={"Connect"}
+        modalSize={"compact"}
+      />
             </div>
             
-          
           
      </span>
       </div>
