@@ -166,7 +166,7 @@ const items: MenuItem[] = [
           />
           <Avatar src="https://www.pinksale.finance/static/media/pinkswap.a95de4f3.png"/>
           &nbsp;
-          <Text strong>PinkSale</Text>
+          <Text strong className='invisible md:visible'>PinkSale</Text>
           &nbsp;<span style={{
             float:'right',
             
@@ -198,8 +198,25 @@ const items: MenuItem[] = [
       />
       
             </div>
+
             <div className='visible md:invisible'>
-              <ConnectWallet
+
+            <div style={{
+              
+            }}>
+            
+            <Avatar className='rounded-full' style={{
+              padding:'2px',
+              border:'1px solid #f3f3f4',
+              backgroundColor:'#f3f3f4',
+              alignItems:'center',
+
+
+            }} src="https://www.pinksale.finance/static/media/ic-bsc.419dfaf2.png"/>
+            <ConnectWallet 
+            style={{
+              marginLeft:'20px',
+            }}
              theme={lightTheme({
               colors: {
               accentText: "#f95192",
@@ -213,6 +230,8 @@ const items: MenuItem[] = [
         btnTitle={"Connect"}
         modalSize={"compact"}
       />
+             </div>
+              
             </div>
             
           
@@ -227,7 +246,7 @@ const items: MenuItem[] = [
             background: colorBgContainer,
           }}
         >
-        <div className='text-pink' style={{
+        <div className='text-pink invisible md:visible' style={{
           display:'flex',
           textAlign:'center',
           marginTop:'31px',
@@ -246,7 +265,29 @@ const items: MenuItem[] = [
       }}/>&nbsp;Trending&nbsp;#1 BanterBucks&nbsp;&nbsp;#2 zkEVM&nbsp;&nbsp;#3PMPY&nbsp;&nbsp;#4 HOOD&nbsp;&nbsp;#5 UNP&nbsp;&nbsp;#6 SAFELUNAR&nbsp;&nbsp;#7 zkEVM&nbsp;&nbsp;#8 zkEVM&nbsp;&nbsp;#9 zkEVM&nbsp;&nbsp;#10 zkEVM
       
       </div>
-      <div style={{
+     <div className='visible md:invisible' style={{
+      display:'flex',
+      textAlign:'center',
+      // marginTop:'31px',
+      // marginLeft:'-20px',
+      // marginRight:'-20px',
+      // paddingLeft: '100px',
+      overflow:'auto',
+      whiteSpace:'nowrap',
+      color:'#f95192',
+      marginTop:'-45px'
+     }}>
+     <LineChartOutlined 
+      style={{
+        color:"#f95192",
+        marginRight:'70px'
+      }}/>&nbsp;Trending&nbsp;#1 BanterBucks&nbsp;&nbsp;#2 zkEVM&nbsp;&nbsp;#3PMPY&nbsp;&nbsp;#4 HOOD&nbsp;&nbsp;#5 UNP&nbsp;&nbsp;#6 SAFELUNAR&nbsp;&nbsp;#7 zkEVM&nbsp;&nbsp;#8 zkEVM&nbsp;&nbsp;#9 zkEVM&nbsp;&nbsp;#10 zkEVM
+      
+      </div>
+
+
+
+      <div className='invisible md:visible' style={{
         textAlign:'center',
         padding:'50px',
         backgroundColor:'#faf9fa'
