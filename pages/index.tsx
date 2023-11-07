@@ -282,7 +282,8 @@ const items: MenuItem[] = [
 
   <div className='grid lg:grid-cols-4 gap-10'>
         <div>
-        <Card title="$387.4M" bordered={false} style={{ width:'200' }}>
+        <Card title="$387.4M" bordered={false} style={{ width:'200',
+      marginLeft:'100px', }}>
           Total Liquidity Raised
           </Card>
         </div>
@@ -368,7 +369,9 @@ const items: MenuItem[] = [
 
       <div className='grid lg:grid-cols-4 gap-10'>
           <div>
-          <Card bordered={false} >
+          <Card bordered={false} style={{
+            marginLeft:'100px',
+          }} >
               <Avatar
         size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
         src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
