@@ -171,12 +171,11 @@ const items: MenuItem[] = [
             float:'right',
             
           }}>
-            <div  style={{
+            <div className='visible sm:invisible' style={{
               position:'absolute',
               right:'0px',
               marginRight:'20px',
               padding:'5px',
-          
             }}
             >
             <Text code  strong><LineChartOutlined />dexview.com</Text>
@@ -212,15 +211,16 @@ const items: MenuItem[] = [
             background: colorBgContainer,
           }}
         >
-        <div style={{
+        <div className='text-pink' style={{
           display:'flex',
           textAlign:'center',
           marginTop:'31px',
-          marginLeft:'-20px',
+          // marginLeft:'-20px',
           marginRight:'-20px',
           paddingLeft: '100px',
           overflow:'auto',
           whiteSpace:'nowrap',
+          color:'#f95192'
 
           }}>
       <LineChartOutlined 
@@ -368,9 +368,12 @@ const items: MenuItem[] = [
         </Row> */}
 
       <div className='grid lg:grid-cols-4 gap-10'>
-          <div>
-          <Card bordered={false} style={{
+          <div style={{
             marginLeft:'100px',
+            
+          }} >
+          <Card bordered={false} style={{
+            
           }} >
               <Avatar
         size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
