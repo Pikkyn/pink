@@ -270,7 +270,7 @@ const items: MenuItem[] = [
       <LineChartOutlined 
       style={{
         color:"#f95192",
-        marginRight:'40px',
+        marginRight:'30px',
         marginTop:'35px',
         fontSize:'small'
       }}/>&nbsp;Trending&nbsp;#1 BanterBucks&nbsp;&nbsp;#2 RAID&nbsp;&nbsp;&nbsp;&nbsp;#4 FANX&nbsp;&nbsp;#5 EAGLE&nbsp;&nbsp;#6 SAFELUNAR&nbsp;&nbsp;#7 WORLD&nbsp;&nbsp;#8 DXR&nbsp;&nbsp;#9 OMX&nbsp;&nbsp;#10 $MAGIC
