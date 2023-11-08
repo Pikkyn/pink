@@ -283,7 +283,7 @@ const items: MenuItem[] = [
       whiteSpace:'nowrap',
       color:'#f95192',
       marginTop:'-45px',
-      marginLeft:'-20px',
+      marginLeft:'-18px',
      }}>
      <LineChartOutlined 
       style={{
