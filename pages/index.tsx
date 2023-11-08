@@ -215,7 +215,7 @@ const items: MenuItem[] = [
             }} src="https://www.pinksale.finance/static/media/ic-bsc.419dfaf2.png"/>
             <ConnectWallet 
             style={{
-              marginLeft:'20px',
+              marginLeft:'22px',
             }}
              theme={lightTheme({
               colors: {
@@ -243,13 +243,14 @@ const items: MenuItem[] = [
             margin: '24px 16px',
             paddingLeft: '50px',
             minHeight: 280,
-            background: colorBgContainer,
+            background: 'colorBgContainer',
+            width:'100%',
           }}
         >
         <div className='text-pink invisible md:visible' style={{
           display:'flex',
           textAlign:'center',
-          marginTop:'31px',
+          marginTop:'20px',
           // marginLeft:'-20px',
           marginRight:'-20px',
           paddingLeft: '100px',
@@ -484,6 +485,15 @@ const items: MenuItem[] = [
     
       </div>
       
+      <div className='visible md:invisible flex '>
+      <h2 
+        style={{
+          // fontSize:'38px',
+          // marginBottom:'0.5em',
+          // fontWeight:'600px',
+          // lineHeight:'1.23px',
+        }}>The Launchpad Protocol for Everyone!</h2>
+      </div>
       
         </Content>
         
