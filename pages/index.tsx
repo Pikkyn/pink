@@ -323,11 +323,11 @@ const items: MenuItem[] = [
               color:'#f95192'
             }}><b>Learn More</b></Button><br/><br/><br/>
           
-
-  <div className='grid lg:grid-cols-4 gap-10'>
-        <div>
-        <Card className='' title="$387.4M" bordered={false} style={{ 
-           marginLeft:'90px', }}>
+  <div className='grid lg:grid-cols-4 gap-5'>
+        <div className='mx-0 md:ml-20'>
+        <Card  title="$387.4M" bordered={false} style={{ 
+             
+            }}>
            Total Liquidity Raised
           </Card>
         </div>
@@ -358,8 +358,8 @@ const items: MenuItem[] = [
         }}>A suite of tools were built to help you create your own tokens and launchpads in a fast, <br/>simple and cheap way, with no prior code knowledge required and 100% decentralized!</p><br/><br/><br/>
 
       <div className='grid lg:grid-cols-4 gap-10'>
-          <div style={{
-            marginLeft:'90px',
+          <div className='mx-0 md:ml-20' style={{
+           
             
           }} >
           <Card bordered={false} style={{
