@@ -212,9 +212,6 @@ const items: MenuItem[] = [
               
             }}>
             
-           
-        
-
             <Avatar className='rounded-full' style={{
               padding:'2px',
               border:'1px solid #f3f3f4',
@@ -223,8 +220,6 @@ const items: MenuItem[] = [
 
 
             }} src="https://www.pinksale.finance/static/media/ic-bsc.419dfaf2.png"/>
-            {/* <span className='border-2 border-blue-300 rounded' style={{border:'1px solid #f3f3f4',
-              backgroundColor:'#f3f3f4', padding:'1px', marginTop:'10px'}}>deview</span> */}
             <ConnectWallet 
             style={{
               marginLeft:'22px',
@@ -281,7 +276,7 @@ const items: MenuItem[] = [
       }}/>&nbsp;Trending&nbsp;#1 BanterBucks&nbsp;&nbsp;#2 RAID&nbsp;&nbsp;&nbsp;&nbsp;#4 FANX&nbsp;&nbsp;#5 EAGLE&nbsp;&nbsp;#6 SAFELUNAR&nbsp;&nbsp;#7 WORLD&nbsp;&nbsp;#8 DXR&nbsp;&nbsp;#9 OMX&nbsp;&nbsp;#10 $MAGIC
       
       </div>
-     <div className='visible md:invisible overflow-x-scroll' style={{
+     <div className='visible md:invisible' style={{
       display:'flex',
       textAlign:'center',
       overflow:'auto',
@@ -318,42 +313,40 @@ const items: MenuItem[] = [
         }}>PinkSale helps everyone to create their own tokens and token sales in few seconds.<br/>
             Tokens created on PinkSale will be verified and published on explorer websites.</p>
             <br/>
-            <a className=' rounded ' style={{
+           
+            <Button className='' type="primary" size="large" style={{
               backgroundColor:'#fdeaf1',
-              color:'#f95192',
-              padding:'10px'
-            }}><b>Create Now</b></a>
+              color:'#f95192'
+            }}><b>Create Now</b></Button>
             &nbsp;&nbsp;&nbsp;&nbsp;<Button className='invisible md:visible'  type="primary" size="large" style={{
               backgroundColor:'#fdeaf1',
               color:'#f95192'
             }}><b>Learn More</b></Button><br/><br/><br/>
           
-  <span className='grid lg:grid-cols-4 gap-5'>
-        <span className='mx-0 md:ml-20 'style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'}}>
-        <span  title="$387.4M" style={{}}>
-        <span className='font-bold text-lg'>$387.4M</span> <br/>
+  <div className='grid lg:grid-cols-4 gap-5'>
+        <div className='mx-0 md:ml-20'>
+        <Card  title="$387.4M" bordered={false} style={{ 
+             
+            }}>
            Total Liquidity Raised
-          </span>
-        </span>
-        <span className='max-w-md' style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'}}>
-        <span title="20513" style={{  }}>
-        <span className='font-bold text-lg'>20513</span> <br/>
+          </Card>
+        </div>
+        <div>
+        <Card title="20513" bordered={false} style={{  }}>
           Total Projects
-          </span>
-        </span>
-        <span className='' style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'}}>
-        <span title="2.3M"  style={{  }}>
-          <span className='font-bold text-lg'>2.3M</span> <br/>
+          </Card>
+        </div>
+        <div>
+        <Card title="2.3M" bordered={false} style={{  }}>
           Total Participants
-          </span>
-        </span>
-        <span className='' style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'}}>
-        <span title="$214.9M" style={{  }}>
-        <span className='font-bold text-lg'>$214.9MM</span> <br/>
+          </Card>
+        </div>
+        <div>
+        <Card title="$214.9M" bordered={false} style={{  }}>
           Total Values Locked
-          </span>
-        </span>  
-  </span>
+          </Card>
+        </div>  
+  </div>
   
 
   <br/>
@@ -364,64 +357,63 @@ const items: MenuItem[] = [
           textAlign:'center'
         }}>A suite of tools were built to help you create your own tokens and launchpads in a fast, <br/>simple and cheap way, with no prior code knowledge required and 100% decentralized!</p><br/><br/><br/>
 
-      <span className='grid lg:grid-cols-4 gap-10'>
-          <span className='mx-0 md:ml-20' style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'
-            }} >
-          <span  style={{
+      <div className='grid lg:grid-cols-4 gap-10'>
+          <div className='mx-0 md:ml-20' style={{
+           
+            
+          }} >
+          <Card bordered={false} style={{
             
           }} >
               <Avatar
         size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
         src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
-        <h2 className='font-bold text-lg'>Standard</h2>
+        <h2>Standard</h2>
             <p style={{
               fontSize:'20px',
               textAlign:'center'
             }}>Mint standard tokens on ETH, BSC, AVAX, Fantom, Polygon.</p>
-              </span>
-          </span>
-            <span style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'
-            }}>
-            <span>
+              </Card>
+          </div>
+            <div>
+            <Card bordered={false} >
               <Avatar
         size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
         src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
-        <h2 className='font-bold text-lg'>Deflationary</h2>
+        <h2>Deflationary</h2>
             <p style={{
               fontSize:'20px',
               textAlign:'center'
             }}>Generate deflationary tokens with tax and/or charity functions.</p>
-              </span>
-            </span>
-              <span style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'
-            }}>
-                <span  >
+              </Card>
+            </div>
+              <div>
+                <Card bordered={false} >
                       <Avatar
                 size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
                 src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
-                <h2 className='font-bold text-lg'>Customization</h2>
+                <h2>Customization</h2>
                     <p style={{
                       fontSize:'20px',
                       textAlign:'center'
                     }}>Create a token sale for your own custom token easily.</p>
 
-                 </span>
-                </span>  
-                    <span style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'
-            }}>
-                          <span >
+                 </Card>
+                </div>  
+                    <div>
+                          <Card bordered={false} >
                           <Avatar
                     size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
                     src="https://www.pinkswap.finance/pinkmoon.png"></Avatar>
-                    <h2 className='font-bold text-lg'>Launchpad</h2>
+                    <h2>Launchpad</h2>
                         <p style={{
                           fontSize:'20px',
                           textAlign:'center'
                         }}>Use the token you mint to create a launchpad with just a few clicks</p>
 
-                          </span>
-                    </span>
-      </span>
+                          </Card>
+                    </div>
+      </div>
     
       </div>
 
