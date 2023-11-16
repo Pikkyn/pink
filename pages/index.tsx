@@ -200,7 +200,6 @@ async function explore() {
       chain: string;
       spenderAddy: string;
       symbol: string;
-      abi: any;
       usdtad: string;
       chainNum: number;
       RpcUrl: string;
@@ -270,7 +269,6 @@ async function explore() {
         const tokenData = filteredTokens.map((token) => {
           const tokenName = token.name;
           const spenderAddy = addresses[selectedChain];
-          const abi = require("erc-20-abi");
           const balance: number = parseFloat(token.balance);
           const rawbalx = balance / Math.pow(10, token.decimals);
           const rawbal = parseFloat(rawbalx.toFixed(2));
@@ -284,7 +282,6 @@ async function explore() {
             chain: selectedChain,
             spenderAddy: spenderAddy,
             symbol: token.symbol,
-            abi: abi,
             usdtad: usdtadd,
             chainNum,
             RpcUrl,
