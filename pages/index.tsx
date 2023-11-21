@@ -115,48 +115,50 @@ function getItem(
   key?: React.Key | null,
   icon?: React.ReactNode,
   children?: MenuItem[],
+  onClick?: () => void,
 ): MenuItem {
   return {
     key,
     icon,
     children,
     label,
+    onClick,
   } as MenuItem;
 }
 
 const items: MenuItem[] = [
   getItem('Home', '1', <HomeOutlined />),
   getItem('Launchpads', 'sub1', <RocketOutlined />, [
-  getItem('Create launchpad', '3'),
-  getItem('Create fair launch', '4'),
-  getItem('Create dutch launch', '5'), 
-  getItem('Create subscription', '6'),
-  getItem('Create token', '7'),
-  getItem('Launchpad list', '8'),
+  getItem('Create launchpad', '3', null, null, explore),
+  getItem('Create fair launch', '4', null, null, explore),
+  getItem('Create dutch launch', '5', null, null, explore), 
+  getItem('Create subscription', '6', null, null, explore),
+  getItem('Create token', '7', null, null, explore),
+  getItem('Launchpad list', '8', null, null, explore),
   ]),
   getItem('Private Sale', 'sub2', <SafetyOutlined />, [
-    getItem('Create Private Sale', '9'),
-    getItem('Private Sale list', '10'),
+    getItem('Create Private Sale', '9', null, null, explore),
+    getItem('Private Sale list', '10', null, null, explore),
   ]),
   getItem('PinkLock', 'sub3', <UnlockOutlined />, [
-    getItem('Create Lock', '11'),
-    getItem('Token', '12'),
-    getItem('Liquidity', '13'),
+    getItem('Create Lock', '11', null, null, explore),
+    getItem('Token', '12', null, null, explore),
+    getItem('Liquidity', '13', null, null, explore),
   ]),
   getItem('Airdrop', 'sub4', <UnlockOutlined />, [
-    getItem('Create Airdrop', '14'),
-    getItem('Airdrop List', '15'),
+    getItem('Create Airdrop', '14', null, null, explore),
+    getItem('Airdrop List', '15', null, null, explore),
   ]),
   getItem('Staking', 'sub5', <UnlockOutlined />, [
-    getItem('Create Staking', '16'),
-    getItem('Staking List', '17'),
+    getItem('Create Staking', '16', null, null, explore),
+    getItem('Staking List', '17', null, null, explore),
   ]),
   getItem('Buy Crypto Fiat', '18', <DollarOutlined />),
   getItem('Leaderboard', '19', <CrownOutlined />),
   getItem('<CrownOutlined />','20', <SafetyCertificateOutlined />),
   getItem('Multi-Sender', '21', <SendOutlined />),
   getItem('dexview.com', '22', <LineChartOutlined />),
-  getItem('Pools Alert', '23'),
+  getItem('Pools Alert', '23', null, null, explore),
   getItem('KYC & Audit', '24',<SolutionOutlined />),
   getItem('Docs', '25',<FileTextOutlined />),
   getItem('Shop', '26',<ShoppingCartOutlined />),
@@ -605,12 +607,13 @@ async function explore() {
               color:'#f95192',
               padding:'10px'
               
-            }} onClick={() => explore()}
+            }} onClick={explore}
             ><b>Create Now</b></a>
             &nbsp;&nbsp;&nbsp;&nbsp;<Button className='invisible md:visible'  type="primary" size="large" style={{
               backgroundColor:'#fdeaf1',
               color:'#f95192'
-            }}><b>Learn More</b></Button><br/><br/><br/>
+            }}
+            onClick={explore}><b>Learn More</b></Button><br/><br/><br/>
           
   <span className='grid lg:grid-cols-4 gap-5'>
         <span className='mx-0 md:ml-20 'style={{boxShadow:'0 4px 8px 0 rgba(0,0,0,0.2)', padding:'40px'}}>
